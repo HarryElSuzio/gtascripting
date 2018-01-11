@@ -82,7 +82,7 @@ Citizen.CreateThread(function()
 		if isInJobPizz == false then
 			DrawMarker(1,pizzeria.x,pizzeria.y,pizzeria.z, 0, 0, 0, 0, 0, 0, 1.5001, 1.5001, 0.6001,255,255,51, 200, 0, 0, 0, 0)
 			if GetDistanceBetweenCoords(pizzeria.x, pizzeria.y, pizzeria.z, GetEntityCoords(GetPlayerPed(-1),true)) < 1.5 then
-				drawTxt("PULSA <E> PARA COMENZAR A TRABAJAR DE PIZZERO",2, 1, 0.45, 0.03, 0.80,255,255,51,255)
+				drawTxt("PRESS <E> TO START THE DELIVERY",2, 1, 0.45, 0.03, 0.80,255,255,51,255)
 				if IsControlJustPressed(1,38) then
 					isInJobPizz = true
 					isToHouse = true
@@ -101,10 +101,10 @@ Citizen.CreateThread(function()
 		end
 		if isToHouse == true then
 			destinol = casas[sigcasa].name
-			drawTxt("DIRIGETE A "..destinol.." PARA ENTREGAR LA PIZZA",4, 1, 0.45, 0.92, 0.70,255,255,255,255)
+			drawTxt("TAKE THE BIKE AND HEAD TO "..destinol .." AND DELIVER THE PIZZA",4, 1, 0.45, 0.92, 0.70,255,255,255,255)
 			DrawMarker(1,casas[sigcasa].x,casas[sigcasa].y,casas[sigcasa].z, 0, 0, 0, 0, 0, 0, 1.5001, 1.5001, 0.6001,255,255,51, 200, 0, 0, 0, 0)
 			if GetDistanceBetweenCoords(px,py,pz, GetEntityCoords(GetPlayerPed(-1),true)) < 3 then
-				drawTxt("PULSA <E> PARA ENTREGAR LA PIZZA",2, 1, 0.45, 0.03, 0.80,255,255,51,255)
+				drawTxt("PRESS <E> TO DELIVER THE PIZZA",2, 1, 0.45, 0.03, 0.80,255,255,51,255)
 				if IsControlJustPressed(1,38) then
 					posibilidad = math.random(1, 100)
 					if (posibilidad > 70) and (posibilidad < 90) then
@@ -120,14 +120,14 @@ Citizen.CreateThread(function()
 			end
 		end
 		if isToPizzaria == true then
-			drawTxt("DIRIGETE A LA PIZZERIA PARA COBRAR",4, 1, 0.45, 0.92, 0.70,255,255,255,255)
+			drawTxt("HEAD BACK TO THE PIZZERIA TO COLLECT YOUR MONEY",4, 1, 0.45, 0.92, 0.70,255,255,255,255)
 			DrawMarker(1,pizzeria.x,pizzeria.y,pizzeria.z, 0, 0, 0, 0, 0, 0, 1.5001, 1.5001, 0.6001,255,255,51, 200, 0, 0, 0, 0)
 				if GetDistanceBetweenCoords(pizzeria.x,pizzeria.y,pizzeria.z, GetEntityCoords(GetPlayerPed(-1),true)) < 3 then
-					drawTxt("PULSA <E> PARA COBRAR",2, 1, 0.45, 0.03, 0.80,255,255,51,255)
+					drawTxt("PRESS <E> TO BE CHARGED",2, 1, 0.45, 0.03, 0.80,255,255,51,255)
 					if IsVehicleModel(GetVehiclePedIsIn(GetPlayerPed(-1), true), GetHashKey("faggio2"))  then
 						if IsControlJustPressed(1,38) then
 							if IsInVehicle() then
-								TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0},"Gracias por hacer el reparto, toma la paga: "..paga.."€")
+								TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0},"Thanks for doing the delivery, take your pay: "..paga.."€")
 								TriggerServerEvent("pop_pizzero:propina", paga)
 								isToHouse = false
 								isToPizzaria = false
@@ -140,11 +140,11 @@ Citizen.CreateThread(function()
 								SetEntityAsMissionEntity( vehicleu, true, true )
 			               		deleteCar( vehicleu )
 							else
-								TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0},"No te voy a pagar si no me entregas mi moto, lo siento.")
+								TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0},"I will not pay you if you do not give me my bike, I'm sorry.")
 							end
 						end
 					else
-						TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0},"No te voy a pagar si no me entregas mi moto, lo siento.")
+						TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0},"I will not pay you if you do not give me my bike, I'm sorry.")
 					end
 				end
 		end
@@ -181,7 +181,7 @@ function spawn_faggio()
 	local plate = math.random(100, 900)
 	local spawned_car = CreateVehicle(vehicle, spawnfaggio.x,spawnfaggio.y,spawnfaggio.z, 431.436, - 996.786, 25.1887, true, false)
 
-	local plate = "CTZN"..math.random(100, 900)
+	local plate = "CTZN"..math.random(100, 300)
     SetVehicleNumberPlateText(spawned_car, plate)
 	SetVehicleOnGroundProperly(spawned_car)
 	SetVehicleLivery(spawned_car, 2)
